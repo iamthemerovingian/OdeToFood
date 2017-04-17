@@ -20,7 +20,28 @@ namespace OdeToFood.Controllers
 
             //ViewBag.Message = message;
 
-            var model = _db.Restaurants.ToList();
+            //var model = _db.Restaurants.ToList();
+
+            //var model = from r in _db.Restaurants
+            //            orderby r.Reviews.Average(review => review.Rating) descending
+            //            select new RestaurantListViewModel
+            //            {
+            //                Id = r.Id,
+            //                Name = r.Name,
+            //                City = r.City,
+            //                Country = r.Country,
+            //                CountOfReviews = r.Reviews.Count()
+            //            };
+
+            var model = _db.Restaurants.OrderByDescending(r => r.Reviews.Average(review => review.Rating))
+                .Select(r => new RestaurantListViewModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    City = r.City,
+                    Country = r.Country,
+                    CountOfReviews = r.Reviews.Count()
+                });
 
             return View(model);
         }
