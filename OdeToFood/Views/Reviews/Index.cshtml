@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OdeToFood.Models.RestaurantReview>
+﻿@*@model IEnumerable<OdeToFood.Models.RestaurantReview>
 
 @{
     ViewBag.Title = "Index";
@@ -49,13 +49,13 @@ We are showing the latest @Model.Count() reviews.<br />
         @Html.DisplayFor(modelItem => item.City)
 
                        
-           @*  @Html.Raw(item.City); *@
+           @*  @Html.Raw(item.City)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Country)
         </td>
         <td>
-           @* @Html.DisplayFor(modelItem => item.Rating) *@
+           @* @Html.DisplayFor(modelItem => item.Rating) 
             R@(item.Rating)
             @@OdeToCode
         </td>
@@ -67,4 +67,4 @@ We are showing the latest @Model.Count() reviews.<br />
     </tr>
 }
 
-</table>
+</table>*@

@@ -208,6 +208,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\OdeToFoodDB.cs" />
+    <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Models\RestaurantReviews.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
