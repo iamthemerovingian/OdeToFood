@@ -142,7 +142,7 @@ namespace OdeToFood.Controllers
     {
         OdeToFoodDb _db = new OdeToFoodDb();
         // GET: Reviews
-        public ActionResult Index([Bind(Prefix = "id")] int id)// thius is a restaurant id.
+        public ActionResult Index([Bind(Prefix = "id")] int id)// this is a restaurant id.
         {
             var restaurant = _db.Restaurants.Find(id);
 
