@@ -12,6 +12,7 @@ namespace OdeToFood.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "OdeToFood.Models.OdeToFoodDb";
         }
 
