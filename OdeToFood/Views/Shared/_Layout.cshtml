@@ -29,14 +29,14 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="content-wrapper body-content clearfix">
         @RenderBody()
-        <div>
+        @*<div>
             @RenderSection("featured", required: false)
         </div>
         <div>
-            @*@Html.Action("BestReview","Reviews")*@
-        </div>
+            @Html.Action("BestReview","Reviews")
+        </div>*@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>

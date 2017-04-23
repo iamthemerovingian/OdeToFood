@@ -35,7 +35,8 @@ namespace OdeToFood
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/themes/base/base.css",
-                      "~/Content/themes/base/jquery-ui.css"));
+                      "~/Content/themes/base/jquery-ui.css",
+                      "~/Content/themes/PagedList.css"));
         }
     }
 }
