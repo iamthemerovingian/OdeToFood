@@ -6,6 +6,8 @@ namespace OdeToFood.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using System.Web.Security;
+    using WebMatrix.WebData;
 
     internal sealed class Configuration : DbMigrationsConfiguration<OdeToFood.Models.OdeToFoodDb>
     {
@@ -46,11 +48,13 @@ namespace OdeToFood.Migrations
                     }
                 });
 
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 context.Restaurants.AddOrUpdate(r => r.Name,
                             new Restaurant { Name = i.ToString(), City = "Nowhere", Country = "USA" });
             }
+
+            SeedMembership();
 
             //context.Reviews.AddOrUpdate(r => r.Id,
             //                            new RestaurantReview
@@ -59,6 +63,27 @@ namespace OdeToFood.Migrations
             //                                Body = "Great Food, and Waitresses!!",
             //                                ReviewerName = "Milinda"
             //                            });
+        }
+
+        private void SeedMembership()
+        {
+            WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfiles", "UserId", "UseraName", autoCreateTables: true);
+
+            var roles = (SimpleRoleProvider)Roles.Provider;
+            var membership = (SimpleMembershipProvider)Membership.Provider;
+
+            if (!roles.RoleExists("Admin"))
+            {
+                roles.CreateRole("Admin");
+            }
+            if (membership.GetUser("milinda", false) == null)
+            {
+                membership.CreateUserAndAccount("milinda", "!Qaz12345");
+            }
+            if (!roles.GetRolesForUser("milinda").Contains("Admin"))
+            {
+                roles.AddUsersToRoles(new[] { "milinda" }, new[] { "Admin" });
+            }
         }
     }
 }
