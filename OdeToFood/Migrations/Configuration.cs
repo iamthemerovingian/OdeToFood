@@ -54,7 +54,7 @@ namespace OdeToFood.Migrations
                             new Restaurant { Name = i.ToString(), City = "Nowhere", Country = "USA" });
             }
 
-            SeedMembership();
+            //SeedMembership();
 
             //context.Reviews.AddOrUpdate(r => r.Id,
             //                            new RestaurantReview
