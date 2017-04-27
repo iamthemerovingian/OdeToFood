@@ -14,7 +14,7 @@ namespace OdeToFood.Models
         public int Id { get; set; }
         [Range(1,10)]
         public int Rating { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceType =typeof(OdeToFood.Views.Home.Resources), ErrorMessageResourceName ="Greeting")]
         [StringLength(maximumLength: 1024, MinimumLength = 5)]
         public string Body { get; set; }
 

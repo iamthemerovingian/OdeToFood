@@ -50,6 +50,19 @@
     <input type="search" name="searchTerm" />
     <input type="submit" name="Search By Name" />
 }*@
+@{ 
+    var money = 3.00m;
+    var time = DateTime.Now;
+}
+<div>
+    @OdeToFood.Views.Home.Resources.Greeting
+</div>
+<div>
+    @money.ToString("c")
+</div>
+<div>
+    @time.ToShortDateString()
+</div>
 
 <form method="get" action="@Url.Action("Index")" data-otf-ajax="true" data-otf-target="#restaurantList">
 
