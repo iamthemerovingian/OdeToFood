@@ -28,7 +28,7 @@ namespace OdeToFood.Models
         {
             if (Rating < 2 && ReviewerName.ToLower().StartsWith("milinda"))
             {
-                yield return new ValidationResult($"Sorry {ReviewerName}, you can't do this!");
+                yield return new ValidationResult($"Sorry {ReviewerName}, you can't do this! rtgweqtwe");
             }
         }
     }
