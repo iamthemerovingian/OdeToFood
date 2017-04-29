@@ -15,10 +15,10 @@ namespace OdeToFood.Controllers
         //[Authorize]
         public ActionResult Search(string name = "French")
         {
+
+            throw new Exception("Something Terrible Has happened!!!");
+
             var message = Server.HtmlEncode(name);
-
-            //throw new Exception("Something Terrible Has happened!!!");
-
             return Content($"Hello, you have reached the Cusine/{name} page");
 
             //return RedirectToAction("Index", "Home", new { name = name });
