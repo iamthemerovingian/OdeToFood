@@ -6,7 +6,12 @@ using System.Web;
 
 namespace OdeToFood.Models
 {
-    public class OdeToFoodDb :DbContext
+    public interface IOdeToFoodDb : IDisposable
+    {
+        IQueryable<T> Query<T>() where T : class;
+    }
+
+    public class OdeToFoodDb :DbContext, IOdeToFoodDb
     {
         public OdeToFoodDb() : base("name = DefaultConnection")
         {
@@ -15,5 +20,10 @@ namespace OdeToFood.Models
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<RestaurantReview> Reviews { get; set; }
+
+        public IQueryable<T> Query<T>() where T : class
+        {
+            return Set<T>();
+        }
     }
 }

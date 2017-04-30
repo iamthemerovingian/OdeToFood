@@ -85,7 +85,7 @@ namespace OdeToFood.Tests.Features
         [TestMethod]
         public void Rating_Only_Uses_First_N_Reviews()
         {
-            var data = BuilRestaurantsWithReviews(ratings: new[] { 1 ,1 ,1 ,10 ,10 ,10 });
+            var data = BuilRestaurantsWithReviews(ratings: new[] { 1, 1, 1, 10, 10, 10 });
 
             var rater = new RestaurantRater(data);
             var result = rater.ComputeResult(new SimpleRatingAlgorithm(), 3);
