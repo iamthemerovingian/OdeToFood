@@ -9,6 +9,10 @@ namespace OdeToFood.Models
     public interface IOdeToFoodDb : IDisposable
     {
         IQueryable<T> Query<T>() where T : class;
+        void Add<T>(T entity) where T : class;
+        void Update<T>(T entity) where T : class;
+        void Remove<T>(T entity) where T : class;
+        void SaveChanges();
     }
 
     public class OdeToFoodDb :DbContext, IOdeToFoodDb
@@ -24,6 +28,26 @@ namespace OdeToFood.Models
         public IQueryable<T> Query<T>() where T : class
         {
             return Set<T>();
+        }
+
+        public void Add<T>(T entity) where T : class
+        {
+            Set<T>().Add(entity);
+        }
+
+        public void Update<T>(T entity) where T : class
+        {
+            Entry(entity).State = EntityState.Modified;
+        }
+
+        public void Remove<T>(T entity) where T : class
+        {
+            Set<T>().Remove(entity);
+        }
+
+        void IOdeToFoodDb.SaveChanges()
+        {
+            SaveChanges();
         }
     }
 }
