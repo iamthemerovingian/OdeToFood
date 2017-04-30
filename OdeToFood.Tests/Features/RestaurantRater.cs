@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace OdeToFood.Tests.Features
 {
-    internal class RestaurantRater
+    public class RestaurantRater
     {
         private Restaurant _Restaurant;
 
@@ -13,13 +13,14 @@ namespace OdeToFood.Tests.Features
             this._Restaurant = restaurant;
         }
 
-        public RatingResult ComputeRating(int numberOfReviews)
+        public  RatingResult ComputeWeightedRate(IRatingAlgorithm algorithm, int numberOfReviews)
         {
-            var result = new RatingResult();
+            return algorithm.Compute(_Restaurant.Reviews.ToList());
+        }
 
-            result.Rating = (int)_Restaurant.Reviews.Average(review => review.Rating);
-
-            return result;
+        public RatingResult ComputeResult(IRatingAlgorithm algorithm, int numberOfReviews)
+        {
+            return algorithm.Compute(_Restaurant.Reviews.Take(numberOfReviews).ToList());
         }
     }
 }

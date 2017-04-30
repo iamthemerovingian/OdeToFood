@@ -66,7 +66,7 @@ namespace OdeToFood.Tests.Features
             var data = BuilRestaurantsWithReviews(ratings: new[] { 4 });
 
             var rater = new RestaurantRater(data);
-            var result = rater.ComputeRating(10);
+            var result = rater.ComputeResult(new SimpleRatingAlgorithm(),10);
 
             Assert.AreEqual(4, result.Rating);
         }
@@ -77,9 +77,31 @@ namespace OdeToFood.Tests.Features
             var data = BuilRestaurantsWithReviews(ratings: new[] { 4, 8 });
 
             var rater = new RestaurantRater(data);
-            var result = rater.ComputeRating(10);
+            var result = rater.ComputeResult(new SimpleRatingAlgorithm(), 10);
 
             Assert.AreEqual(6, result.Rating);
+        }
+
+        [TestMethod]
+        public void Rating_Only_Uses_First_N_Reviews()
+        {
+            var data = BuilRestaurantsWithReviews(ratings: new[] { 1 ,1 ,1 ,10 ,10 ,10 });
+
+            var rater = new RestaurantRater(data);
+            var result = rater.ComputeResult(new SimpleRatingAlgorithm(), 3);
+
+            Assert.AreEqual(1, result.Rating);
+        }
+
+        [TestMethod]
+        public void Computes_Weightedf_Average_For_Two_Review()
+        {
+            var data = BuilRestaurantsWithReviews(3,9);
+
+            var rater = new RestaurantRater(data);
+            var result = rater.ComputeWeightedRate(new WeightedRatingAlgorithm(),0);
+
+            Assert.AreEqual(5, result.Rating);
         }
 
         private Restaurant BuilRestaurantsWithReviews(params int[] ratings )
