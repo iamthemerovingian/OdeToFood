@@ -9,16 +9,16 @@ namespace OdeToFood.Migrations
     using System.Web.Security;
     using WebMatrix.WebData;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<OdeToFood.Models.OdeToFoodDb>
+    internal sealed class Configuration : DbMigrationsConfiguration<OdeToFoodDb>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
-            ContextKey = "OdeToFood.Models.OdeToFoodDb";
+            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = false;
+            //ContextKey = "OdeToFood.Models.OdeToFoodDb";
         }
 
-        protected override void Seed(OdeToFood.Models.OdeToFoodDb context)
+        protected override void Seed(OdeToFoodDb context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -48,11 +48,11 @@ namespace OdeToFood.Migrations
                     }
                 });
 
-            for (int i = 0; i < 1000; i++)
-            {
-                context.Restaurants.AddOrUpdate(r => r.Name,
-                            new Restaurant { Name = i.ToString(), City = "Nowhere", Country = "USA" });
-            }
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    context.Restaurants.AddOrUpdate(r => r.Name,
+            //                new Restaurant { Name = i.ToString(), City = "Nowhere", Country = "USA" });
+            //}
 
             //SeedMembership();
 
@@ -67,7 +67,10 @@ namespace OdeToFood.Migrations
 
         private void SeedMembership()
         {
-            WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfiles", "UserId", "UseraName", autoCreateTables: true);
+            if (!WebSecurity.Initialized)
+            {
+                WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfiles", "UserId", "UseraName", autoCreateTables: true);
+            }
 
             var roles = (SimpleRoleProvider)Roles.Provider;
             var membership = (SimpleMembershipProvider)Membership.Provider;

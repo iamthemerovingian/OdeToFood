@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using System.Web.UI;
+using System.Configuration;
 
 namespace OdeToFood.Controllers
 {
@@ -86,7 +87,7 @@ namespace OdeToFood.Controllers
             {
                 return PartialView("_Restaurants", model);
             }
-
+            ViewBag.MailServer = ConfigurationManager.AppSettings.Get("MailServer");
             return View(model);
         }
 

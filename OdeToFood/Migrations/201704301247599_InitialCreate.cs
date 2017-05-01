@@ -24,12 +24,23 @@ namespace OdeToFood.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Rating = c.Int(nullable: false),
-                        Body = c.String(),
+                        Body = c.String(nullable: false, maxLength: 1024),
+                        ReviewerName = c.String(),
                         RestaurantId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Restaurants", t => t.RestaurantId, cascadeDelete: true)
                 .Index(t => t.RestaurantId);
+            
+            CreateTable(
+                "dbo.UserProfile",
+                c => new
+                    {
+                        UserId = c.Int(nullable: false, identity: true),
+                        UserName = c.String(),
+                        FavouriteRestaurant = c.String(),
+                    })
+                .PrimaryKey(t => t.UserId);
             
         }
         
@@ -37,6 +48,7 @@ namespace OdeToFood.Migrations
         {
             DropForeignKey("dbo.RestaurantReviews", "RestaurantId", "dbo.Restaurants");
             DropIndex("dbo.RestaurantReviews", new[] { "RestaurantId" });
+            DropTable("dbo.UserProfile");
             DropTable("dbo.RestaurantReviews");
             DropTable("dbo.Restaurants");
         }
